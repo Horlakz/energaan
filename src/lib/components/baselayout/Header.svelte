@@ -13,8 +13,8 @@
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Solar Panels", href: "/solar-panels" },
-    { name: "Savings", href: "/savings" },
+    { name: "Plans", href: "/plans" },
+    { name: "Product & Services", href: "/products" },
     { name: "FAQs", href: "/faqs" },
     { name: "Contact Us", href: "/contact" },
   ];
