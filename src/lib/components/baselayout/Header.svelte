@@ -33,19 +33,33 @@
       </a>
     </h1>
 
-    <ul
-      class:ul-mobile={navActive}
-      class:ul={!navActive}
-      transition:slide={{ delay: 250, duration: 500, easing: quintOut }}
-    >
-      {#each navLinks as link}
-        <li>
-          <a href={link.href} class:nav-active={activeNav(link.href)}>
-            {link.name}
-          </a>
-        </li>
-      {/each}
-    </ul>
+    {#if navActive}
+      <ul
+        class="ul-mobile"
+        transition:slide={{ delay: 250, duration: 500, easing: quintOut }}
+      >
+        {#each navLinks as link}
+          <li>
+            <a href={link.href} class:nav-active={activeNav(link.href)}>
+              {link.name}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    {:else}
+      <ul
+        class="ul"
+        transition:slide={{ delay: 250, duration: 500, easing: quintOut }}
+      >
+        {#each navLinks as link}
+          <li>
+            <a href={link.href} class:nav-active={activeNav(link.href)}>
+              {link.name}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    {/if}
 
     <a href="/about" class="font-medium hidden md:block">Get Started</a>
 
