@@ -1,6 +1,7 @@
 <script lang="ts">
   import { ArrowRight, ArrowRightCircle } from "svelte-heros-v2";
   import type { PageData } from "./$types";
+  import { goto } from "$app/navigation";
 
   import graphImg from "$lib/assets/graph.png";
 
@@ -9,7 +10,6 @@
 
 <section class="w-full flex center sm:px-20 px-6">
   <div class="flex flex-col justify-start items-start my-10 w-full">
-    <!-- <div class="w-full flex items-start justify-start pl-32"> -->
     <div
       class="bg-primary bg-opacity-10 py-1 px-4 w-fit flex center gap-2 rounded-md"
     >
@@ -18,7 +18,6 @@
         utility prices have steadily increased
       </span>
     </div>
-    <!-- </div> -->
 
     <h2 class="text-5xl font-light pl-6 pt-4">
       Solar energy. <br />the smartest way
@@ -32,6 +31,7 @@
     <p class="font-medium mb-64">installations</p>
     <button
       class="flex w-11/12 h-20 m-3 justify-center place-items-center bg-orange-600 rounded-2xl"
+      on:click={() => goto("/plans")}
     >
       <span>Explore More</span>
       <ArrowRight />
@@ -45,7 +45,10 @@
       <p class="md:text-4xl text-2xl">
         A Responsible <br /> Corporate Customers
       </p>
-      <button class="rounded-3xl bg-primary text-white text-sm px-4 py-2">
+      <button
+        class="rounded-3xl bg-primary text-white text-sm px-4 py-2"
+        on:click={() => goto("/plans")}
+      >
         Get Started
       </button>
     </div>
@@ -74,9 +77,9 @@
       <div class="w-full space-y-4">
         <div class="flex justify-start items-center gap-2">
           <div class="bg-primary h-2 w-2 rounded-full" />
-          <span class="text-primary uppercase text-xs font-medium"
-            >solar panel energy</span
-          >
+          <span class="text-primary uppercase text-xs font-medium">
+            solar panel energy
+          </span>
         </div>
         <p class="text-gray-700">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
@@ -120,7 +123,10 @@
   <div class="text-white sm:px-10 px-4 py-8 space-y-14">
     <div class="flex justify-between items-end">
       <p class="md:text-4xl text-2xl">What Customers <br /> Says?</p>
-      <button class="rounded-3xl bg-slate-800 text-white text-xs px-6 py-3">
+      <button
+        class="rounded-3xl bg-slate-800 text-white text-xs px-6 py-3"
+        on:click={() => goto("/plans")}
+      >
         Get Started
       </button>
     </div>
