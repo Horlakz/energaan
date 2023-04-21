@@ -33,9 +33,10 @@
       </a>
     </h1>
 
-    {#if navActive}
+    {#key navActive}
       <ul
-        class="ul-mobile"
+        class:ul-mobile={navActive}
+        class:ul={!navActive}
         transition:slide={{ delay: 250, duration: 500, easing: quintOut }}
       >
         {#each navLinks as link}
@@ -46,20 +47,7 @@
           </li>
         {/each}
       </ul>
-    {:else}
-      <ul
-        class="ul"
-        transition:slide={{ delay: 250, duration: 500, easing: quintOut }}
-      >
-        {#each navLinks as link}
-          <li>
-            <a href={link.href} class:nav-active={activeNav(link.href)}>
-              {link.name}
-            </a>
-          </li>
-        {/each}
-      </ul>
-    {/if}
+    {/key}
 
     <a href="/about" class="font-medium hidden md:block">Get Started</a>
 
