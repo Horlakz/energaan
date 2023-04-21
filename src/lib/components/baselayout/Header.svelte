@@ -83,7 +83,7 @@
     @apply md:font-semibold;
   }
 
-  .nav-mobile-active {
-    @apply text-white bg-primary px-4 py-2 rounded-lg;
-  }
+  // .nav-mobile-active {
+  //   @apply text-white bg-primary px-4 py-2 rounded-lg;
+  // }
 </style>
