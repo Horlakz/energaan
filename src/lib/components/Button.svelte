@@ -1,13 +1,12 @@
 <script lang="ts">
-  export let href: string = "";
+  export let href: string | undefined = undefined;
 </script>
 
-<button
+<svelte:element
+  this={href ? "a" : "button"}
+  {href}
   class="bg-primary text-white px-3.5 py-2 text-md rounded-lg cursor-pointer"
+  on:click
 >
-  {#if href}
-    <a {href}><slot /></a>
-  {:else}
-    <slot />
-  {/if}
-</button>
+  <slot />
+</svelte:element>
