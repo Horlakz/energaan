@@ -59,15 +59,3 @@
     </select>
   </div>
 {/if}
-
-<style lang="scss">
-  //   input {
-  //     border: none;
-  //     outline: none;
-  //   }
-
-  //   input:focus {
-  //     border: none;
-  //     outline: none;
-  //   }
-</style>
