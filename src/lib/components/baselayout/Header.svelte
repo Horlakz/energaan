@@ -7,10 +7,6 @@
   export let logo: string, title: string;
   let navActive: boolean = false;
 
-  function activeNav(pathname: string): boolean {
-    return $page.url.pathname === pathname;
-  }
-
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Plans", href: "/plans" },
@@ -41,7 +37,10 @@
       >
         {#each navLinks as link}
           <li>
-            <a href={link.href} class:nav-active={activeNav(link.href)}>
+            <a
+              href={link.href}
+              class:nav-active={$page.url.pathname === link.href}
+            >
               {link.name}
             </a>
           </li>
