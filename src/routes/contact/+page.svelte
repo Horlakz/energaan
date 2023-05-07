@@ -4,24 +4,33 @@
   import FormGroup from "$lib/components/FormGroup.svelte";
   import Button from "$lib/components/Button.svelte";
 
+  type Status = "success" | "error" | "pending";
+
   let fullName = "",
     email = "",
     phone = "",
     country = "",
     message = "";
-
+  let status: Status;
   export let data: PageData;
 
   function handleSubmit(e: Event) {
     e.preventDefault();
+    status = "pending";
 
-    console.log({
-      fullName,
-      email,
-      phone,
-      country,
-      message,
-    });
+    // contact
+    //   .send({
+    //     fullName,
+    //     email,
+    //     phone,
+    //     country,
+    //     message,
+    //   })
+    //   .then(() => (status = "success"))
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //     status = "error";
+    //   });
   }
 </script>
 
@@ -50,6 +59,11 @@
 
       <div class="md:col-span-2 items-center grid">
         <Button on:click={handleSubmit}>Submit</Button>
+        {#if status == "pending"}
+          loading...
+        {:else if status == "error"}
+          error
+        {/if}
       </div>
     </form>
 
