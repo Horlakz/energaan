@@ -14,7 +14,15 @@
     { name: "FAQs", href: "/faqs" },
     { name: "Contact Us", href: "/contact" },
   ];
+
+  const closeModal = (e: any) => {
+    if (navActive && !e.target.closest("nav")) {
+      navActive = false;
+    }
+  };
 </script>
+
+<svelte:window on:click={closeModal} />
 
 <header>
   <nav
