@@ -35,4 +35,4 @@ jobs:
 
       - name: Run Docker images
         run: |
-          docker run -d --restart unless-stopped -p 1500:3000 --name energaan energaan:${{ github.sha }}
+          docker run -d --restart unless-stopped -p 4200:3000 --name energaan energaan:${{ github.sha }}
