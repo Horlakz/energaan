@@ -11,7 +11,7 @@
     { name: "Home", href: "/" },
     { name: "Plans", href: "/plans" },
     { name: "Product & Services", href: "/products" },
-    { name: "FAQs", href: "/faqs" },
+    { name: "FAQs", href: "/faq" },
     { name: "Contact Us", href: "/contact" },
   ];
 
