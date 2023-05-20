@@ -71,14 +71,10 @@
   }
 
   .ul-mobile {
-    @apply bg-gray-100 p-4 gap-4 flex flex-col items-center justify-center absolute top-12 right-10 w-2/4;
+    @apply bg-gray-100 p-4 gap-4 flex flex-col items-center justify-center absolute top-12 right-10 w-2/4 z-50;
   }
 
   .nav-active {
     @apply md:font-semibold;
   }
-
-  // .nav-mobile-active {
-  //   @apply text-white bg-primary px-4 py-2 rounded-lg;
-  // }
 </style>
