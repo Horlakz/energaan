@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="border border-primary bg-primary bg-opacity-5 p-2 rounded-xl shadow-md shadow-primary"
+  class="border border-primary bg-primary bg-opacity-5 p-2 rounded-xl shadow-md shadow-[#8eb2ac]"
 >
   <h2>
     <button
