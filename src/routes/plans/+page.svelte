@@ -14,10 +14,10 @@
   >
     {#each data.plans as plan, i}
       <Card
-        id={i}
         img={plan.img}
         title={plan.title}
         description={plan.description}
+        href={`/plans/${i}`}
       />
     {/each}
   </section>

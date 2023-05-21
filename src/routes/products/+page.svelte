@@ -73,10 +73,10 @@
     >
       {#each data.products as product, i}
         <Card
-          id={i}
           img={product.img}
           title={product.title}
           description={product.description}
+          href={`/products/${i}`}
         />
       {/each}
     </section>
