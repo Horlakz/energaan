@@ -3,10 +3,7 @@
 
   import Button from "./Button.svelte";
 
-  export let title: string,
-    img: string,
-    description: string,
-    id: string | number;
+  export let title: string, img: string, description: string, href: string;
 </script>
 
 <div
@@ -21,6 +18,6 @@
     <span class="text-sm font-semibold text-primary cursor-pointer">
       Read More
     </span>
-    <Button on:click={() => goto(`/plans/${id}`)}>Get a Quote</Button>
+    <Button on:click={() => goto(href)}>Get a Quote</Button>
   </div>
 </div>
