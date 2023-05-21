@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
 
-  import Button from "../Button.svelte";
+  import Button from "./Button.svelte";
 
   export let title: string,
     img: string,
