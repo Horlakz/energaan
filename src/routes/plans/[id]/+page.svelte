@@ -4,7 +4,7 @@
   import Button from "$lib/components/Button.svelte";
   import FormGroup from "$lib/components/FormGroup.svelte";
 
-  export let data: PageData;
+  // export let data: PageData;
 </script>
 
 <main class="sm:px-20 p-10">
