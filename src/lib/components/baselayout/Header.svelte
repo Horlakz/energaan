@@ -4,15 +4,17 @@
   import { quintOut } from "svelte/easing";
   import { slide } from "svelte/transition";
 
-  export let logo: string, title: string;
-  let navActive: boolean = false;
+  import logo from "$lib/assets/logo.png";
 
+  export let title: string;
+
+  let navActive: boolean = false;
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Plans", href: "/plans" },
     { name: "Product & Services", href: "/products" },
     { name: "FAQs", href: "/faq" },
-    { name: "Contact Us", href: "/contact" },
+    { name: "Gallery", href: "/gallery" },
   ];
 
   const closeModal = (e: any) => {
@@ -25,17 +27,10 @@
 <svelte:window on:click={closeModal} />
 
 <header>
-  <nav
-    class="flex justify-between items-center w-full px-14 lg:px-20 py-6 md:py-8"
-  >
-    <h1>
-      <!-- <img src={logo} alt="logo" /> -->
-      <a href="/">
-        <span class="text-xl">
-          {title}
-        </span>
-      </a>
-    </h1>
+  <nav class="flex justify-between items-center w-full px-14 lg:px-20 py-4">
+    <a href="/">
+      <img src={logo} alt={title} class="w-20" />
+    </a>
 
     {#key navActive}
       <ul
@@ -56,7 +51,7 @@
       </ul>
     {/key}
 
-    <a href="/about" class="font-medium hidden md:block">Get Started</a>
+    <a href="/contact" class="font-medium hidden md:block">Contact Us</a>
 
     <Bars3
       class="h-8 w-8 sm:hidden cursor-pointer"
