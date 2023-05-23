@@ -4,6 +4,7 @@
   import "styles/global.scss";
   import Header from "$lib/components/baselayout/Header.svelte";
   import Footer from "$lib/components/baselayout/Footer.svelte";
+  import logo from "$lib/assets/logo.png";
 
   export let data: LayoutData;
 </script>
@@ -14,10 +15,10 @@
     name="keywords"
     content="properties, housing, property and hosting, airbnb, book an apartment"
   />
-  <!-- <link rel="shortcut icon" href={logo} /> -->
+  <link rel="shortcut icon" href={logo} />
   <title>{data.title}</title>
 </svelte:head>
 
-<Header logo={data.logo} title={data.title} />
+<Header title={data.title} />
 <slot />
 <Footer />
