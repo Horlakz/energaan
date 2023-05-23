@@ -3,8 +3,12 @@
 
   import Button from "$lib/components/Button.svelte";
   import Card from "$lib/components/Card.svelte";
+  import GetQuoteForm from "$lib/components/GetQuoteForm.svelte";
+  import Modal from "$lib/components/Modal.svelte";
 
   export let data: PageData;
+
+  let open = false;
 </script>
 
 <main>
@@ -77,8 +81,11 @@
           title={product.title}
           description={product.description}
           href={`/products/${i}`}
+          on:click={() => (open = true)}
         />
       {/each}
     </section>
   </div>
 </main>
+
+<Modal bind:open><GetQuoteForm /></Modal>

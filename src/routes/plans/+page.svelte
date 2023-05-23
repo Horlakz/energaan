@@ -2,8 +2,12 @@
   import type { PageData } from "./$types";
 
   import Card from "$lib/components/Card.svelte";
+  import GetQuoteForm from "$lib/components/GetQuoteForm.svelte";
+  import Modal from "$lib/components/Modal.svelte";
 
   export let data: PageData;
+
+  let open = false;
 </script>
 
 <main class="mb-10">
@@ -18,7 +22,10 @@
         title={plan.title}
         description={plan.description}
         href={`/plans/${i}`}
+        on:click={() => (open = true)}
       />
     {/each}
   </section>
 </main>
+
+<Modal bind:open><GetQuoteForm /></Modal>
