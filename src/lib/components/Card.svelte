@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
-
   import Button from "./Button.svelte";
 
   export let title: string, img: string, description: string, href: string;
@@ -15,9 +13,11 @@
     {description}
   </p>
   <div class="p-3 w-full flex justify-between items-center absolute bottom-0">
-    <span class="text-sm font-semibold text-primary cursor-pointer">
-      Read More
-    </span>
-    <Button on:click={() => goto(href)}>Get a Quote</Button>
+    <a {href}>
+      <span class="text-sm font-semibold text-primary cursor-pointer">
+        Read More
+      </span>
+    </a>
+    <Button on:click>Get a Quote</Button>
   </div>
 </div>
