@@ -2,6 +2,7 @@ import type { PageLoad } from "./$types";
 
 export const load = (async () => {
   return {
+    title: "Lorem Ipsum Dolor Sit",
     images: [
       {
         image: "https://dummyimage.com/200x150/09f/fff.png",
@@ -19,6 +20,16 @@ export const load = (async () => {
         image: "https://dummyimage.com/200x150/8fd/fff.png",
         name: "Solar Home Lighting Solution",
       },
+    ],
+    features: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     ],
   };
 }) satisfies PageLoad;
