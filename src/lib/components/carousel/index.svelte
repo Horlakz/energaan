@@ -1,17 +1,13 @@
 <script lang="ts">
   import { sineIn } from "svelte/easing";
   import { slide } from "svelte/transition";
+  import { PUBLIC_API_URL } from "$env/static/public";
 
   import Button from "./Button.svelte";
   import Indicator from "./Indicator.svelte";
   import Thumbnail from "./Thumbnail.svelte";
 
-  interface ImagesT {
-    image: string;
-    name: string;
-  }
-
-  export let images: ImagesT[] = [];
+  export let images: string[] = [];
 
   let currentSlideItem: number = 0;
 
@@ -44,8 +40,8 @@
           axis: "x",
         }}
         class="absolute inset-0 w-full h-full object-cover object-center"
-        src={item.image}
-        alt={item.name}
+        src={`${PUBLIC_API_URL}/media/${item}`}
+        alt={`Slide ${currentSlideItem + 1}`}
         width={400}
         height={300}
       />
@@ -54,7 +50,7 @@
 
   <!-- carousel indicators -->
   <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-    {#each images as { name }, i}
+    {#each images as name, i}
       <Indicator
         {name}
         selected={currentSlideItem === i}
@@ -70,12 +66,12 @@
 
 <!-- thumbnails -->
 <div class="flex flex-row justify-center gap-2 m-2 bg-gray-100">
-  {#each images as { name, image }, id}
+  {#each images as image, id}
     <Thumbnail
       {thumbWidth}
-      src={image}
-      alt={name}
-      titleLink={name}
+      src={`${PUBLIC_API_URL}/media/${image}`}
+      alt={`Slide ${id + 1}`}
+      titleLink={`Slide ${id + 1}`}
       {id}
       selected={currentSlideItem === id}
       on:click={() => goToSlide(id)}
