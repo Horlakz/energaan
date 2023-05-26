@@ -16,12 +16,12 @@
   <section
     class="sm:px-20 px-8 sm:py-10 w-full grid sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-6 h-full"
   >
-    {#each data.plans as plan, i}
+    {#each data.plans as plan}
       <Card
-        img={plan.img}
+        img={plan.image}
         title={plan.title}
         description={plan.description}
-        href={`/plans/${i}`}
+        href={`/plans/${plan.slug}`}
         on:click={() => (open = true)}
       />
     {/each}

@@ -22,8 +22,8 @@
     {#each data.faqs as faq}
       <div class="w-full">
         <Accordion>
-          <span slot="header" class="text-md font-bold">{faq.question}</span>
-          <p class="">{faq.answer}</p>
+          <span slot="header" class="text-md font-bold">{faq.title}</span>
+          <p class="">{faq.description}</p>
         </Accordion>
       </div>
     {/each}

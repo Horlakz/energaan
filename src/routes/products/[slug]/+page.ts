@@ -1,35 +1,14 @@
 import type { PageLoad } from "./$types";
+import { PUBLIC_API_URL } from "$env/static/public";
 
-export const load = (async () => {
+export const load = (async ({ fetch, params }) => {
+  const res = await fetch(`${PUBLIC_API_URL}/products/${params.slug}`);
+  const product = await res.json();
+
   return {
-    title: "Lorem Ipsum Dolor Sit",
-    images: [
-      {
-        image: "https://dummyimage.com/200x150/09f/fff.png",
-        name: "Solar Streetlights Solution",
-      },
-      {
-        image: "https://dummyimage.com/200x150/000/fff.png",
-        name: "Solar Water Pumping Solution",
-      },
-      {
-        image: "https://dummyimage.com/200x150/0fd/fff.png",
-        name: "Solar Water Heating Solution",
-      },
-      {
-        image: "https://dummyimage.com/200x150/8fd/fff.png",
-        name: "Solar Home Lighting Solution",
-      },
-    ],
-    features: [
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    ],
+    title: product.data.product.title,
+    images: product.data.product.images,
+    features: product.data.product.features,
+    description: product.data.product.description,
   };
 }) satisfies PageLoad;

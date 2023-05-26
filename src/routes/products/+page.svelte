@@ -5,6 +5,7 @@
   import Card from "$lib/components/Card.svelte";
   import GetQuoteForm from "$lib/components/GetQuoteForm.svelte";
   import Modal from "$lib/components/Modal.svelte";
+  import { categoryStore } from "$lib/stores/product";
 
   export let data: PageData;
 
@@ -41,12 +42,15 @@
         {#each data.categories as item}
           <div class="flex items-center mb-4">
             <input
-              id={item.id}
+              id={item.slug}
               type="checkbox"
-              value=""
+              value={item.uuid}
               class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
             />
-            <label for={item.id} class="ml-2 text-sm font-medium text-gray-900">
+            <label
+              for={item.slug}
+              class="ml-2 text-sm font-medium text-gray-900"
+            >
               {item.name}
             </label>
           </div>
@@ -75,12 +79,12 @@
     <section
       class="sm:px-20 px-6 w-full grid sm:grid-cols-3 gap-3 md:gap-6 h-full"
     >
-      {#each data.products as product, i}
+      {#each data.products as product}
         <Card
-          img={product.img}
+          img={product.images[0]}
           title={product.title}
           description={product.description}
-          href={`/products/${i}`}
+          href={`/products/${product.slug}`}
           on:click={() => (open = true)}
         />
       {/each}

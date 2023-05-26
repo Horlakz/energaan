@@ -1,40 +1,15 @@
+import { PUBLIC_API_URL } from "$env/static/public";
 import type { PageLoad } from "./$types";
 
-export const load = (async () => {
-  return {
-    products: [
-      {
-        title: "Solar Streetlights Solution",
-        img: "https://dummyimage.com/200x150/09f/fff.png",
-        description:
-          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, necessitatibus, minus, quam perferendis iure perspiciatis quisquam iusto odit pariatur soluta voluptatibus facere laudantium velit nulla id quidem rerum. Iste, excepturi.",
-      },
-      {
-        title: "Solar Water Pumping Solution",
-        img: "https://dummyimage.com/200x150/09f/fff.png",
-        description:
-          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, necessitatibus, minus, quam perferendis iure perspiciatis quisquam iusto odit pariatur soluta voluptatibus facere laudantium velit nulla id quidem rerum. Iste, excepturi.",
-      },
-      {
-        title: "Solar Water Heating Solution",
-        img: "https://dummyimage.com/200x150/09f/fff.png",
-        description:
-          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, necessitatibus, minus, quam perferendis iure perspiciatis quisquam iusto odit pariatur soluta voluptatibus facere laudantium velit nulla id quidem rerum. Iste, excepturi.",
-      },
-      {
-        title: "Solar Home Lighting Solution",
-        img: "https://dummyimage.com/200x150/09f/fff.png",
-        description:
-          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, necessitatibus, minus, quam perferendis iure perspiciatis quisquam iusto odit pariatur soluta voluptatibus facere laudantium velit nulla id quidem rerum. Iste, excepturi.",
-      },
-    ],
+export const load = (async ({ fetch, url }) => {
+  const products = await fetch(`${PUBLIC_API_URL}/products?categoryId=${""}}`);
+  const categories = await fetch(`${PUBLIC_API_URL}/categories`);
 
-    categories: [
-      { id: "1", slug: "panels", name: "Panels" },
-      { id: "2", slug: "inverters", name: "Inverters" },
-      { id: "3", slug: "batteries", name: "Batteries" },
-      { id: "4", slug: "solar-water-pumps", name: "Solar Water Pumps" },
-      { id: "5", slug: "solar-water-heaters", name: "Solar Water Heaters" },
-    ],
+  const productsData = await products.json();
+  const categoriesData = await categories.json();
+
+  return {
+    products: productsData.data.result,
+    categories: categoriesData.data.result,
   };
 }) satisfies PageLoad;

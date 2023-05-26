@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
+  import { PUBLIC_API_URL } from "$env/static/public";
 
   export let data: PageData;
 </script>
@@ -14,11 +15,16 @@
       <div
         class="border-2 border-primary shadow-md rounded-3xl overflow-hidden"
       >
-        <img src={item.url} alt={item.name} class="w-full h-80" />
+        <img
+          src={`${PUBLIC_API_URL}/media/${item.image}`}
+          alt={item.title}
+          class="w-full h-80"
+        />
         <span
           class="text-lg font-medium px-4 w-full flex center bg-primary bg-opacity-20"
-          >{item.name}</span
         >
+          {item.title}
+        </span>
       </div>
     {/each}
   </section>

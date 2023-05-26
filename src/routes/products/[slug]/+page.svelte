@@ -36,10 +36,7 @@
     <div class="space-y-2">
       <h4 class="text-xl font-semibold underline">Product Description</h4>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident
-        totam reprehenderit vitae recusandae sint possimus molestias debitis.
-        Exercitationem possimus debitis, maiores atque cum dicta natus tempore
-        autem alias eaque sit.
+        {data.description}
       </p>
     </div>
 
