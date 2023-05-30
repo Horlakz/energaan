@@ -5,7 +5,6 @@
   import Card from "$lib/components/Card.svelte";
   import GetQuoteForm from "$lib/components/GetQuoteForm.svelte";
   import Modal from "$lib/components/Modal.svelte";
-  import { categoryStore } from "$lib/stores/product";
 
   export let data: PageData;
 
