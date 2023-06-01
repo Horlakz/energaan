@@ -8,8 +8,8 @@ COPY *.config.ts ./
 
 RUN yarn
 
-COPY ./src ./
-COPY ./static ./
+COPY ./src ./src
+COPY ./static ./static
 
 RUN yarn check
 
