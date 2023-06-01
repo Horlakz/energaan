@@ -10,8 +10,7 @@ RUN yarn
 
 COPY ./src ./src
 COPY ./static ./static
-
-ENV PUBLIC_API_URL=any
+COPY ./.env ./.env
 
 RUN yarn check
 
