@@ -10,7 +10,8 @@ RUN yarn
 
 COPY ./src ./src
 COPY ./static ./static
-COPY ./.env ./.env
+
+ENV PUBLIC_API_URL=https://api.energaan.horlakz.com/api/v1
 
 RUN yarn check
 
