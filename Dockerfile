@@ -11,6 +11,8 @@ RUN yarn
 COPY ./src ./src
 COPY ./static ./static
 
+ENV PUBLIC_API_URL=any
+
 RUN yarn check
 
 RUN yarn build
