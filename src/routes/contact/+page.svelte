@@ -1,36 +1,46 @@
 <script lang="ts">
   import type { PageData } from "./$types";
+  import { createMutation } from "@tanstack/svelte-query";
 
   import FormGroup from "$lib/components/FormGroup.svelte";
   import Button from "$lib/components/Button.svelte";
+  import Contact from "$lib/services/contact";
 
   type Status = "success" | "error" | "pending";
+  const contact = new Contact();
 
   let fullName = "",
     email = "",
     phone = "",
     country = "",
     message = "";
-  let status: Status;
   export let data: PageData;
+
+  $: formData = {
+    fullName,
+    email,
+    phone,
+    country,
+    message,
+  };
+
+  const mutation = createMutation(async () => await contact.submit(formData), {
+    onSuccess: () => {
+      console.log("success");
+
+      // clear form
+      fullName = "";
+      email = "";
+      phone = "";
+      country = "";
+      message = "";
+    },
+  });
 
   function handleSubmit(e: Event) {
     e.preventDefault();
-    status = "pending";
 
-    // contact
-    //   .send({
-    //     fullName,
-    //     email,
-    //     phone,
-    //     country,
-    //     message,
-    //   })
-    //   .then(() => (status = "success"))
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //     status = "error";
-    //   });
+    $mutation.mutate();
   }
 </script>
 
@@ -47,6 +57,8 @@
     class="w-full flex md:flex-row flex-col justify-between items-center gap-10"
   >
     <form
+      method="post"
+      action="?/submit"
       class="w-full bg-primary bg-opacity-10 shadow-md p-4 border-2 rounded-md grid md:grid-cols-2 gap-4"
     >
       <FormGroup label="Full Name" bind:value={fullName} />
@@ -58,12 +70,9 @@
       </div>
 
       <div class="md:col-span-2 items-center grid">
-        <Button on:click={handleSubmit}>Submit</Button>
-        {#if status == "pending"}
-          loading...
-        {:else if status == "error"}
-          error
-        {/if}
+        <Button isLoading={$mutation.isLoading} on:click={handleSubmit}>
+          Submit{$mutation.isLoading ? "ting.." : ""}
+        </Button>
       </div>
     </form>
 
