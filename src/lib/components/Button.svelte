@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let href: string | undefined = undefined;
+  import classNames from "classnames";
+  import Spinner from "./svg/Spinner.svelte";
+
+  export let href: string | undefined = undefined,
+    isLoading: boolean = false;
 
   const variants = {
     primary: "bg-primary text-white",
@@ -11,8 +15,15 @@
 <svelte:element
   this={href ? "a" : "button"}
   {href}
-  class={`${variants["primary"]} hover:bg-opacity-80 px-3.5 py-1.5 text-md rounded-lg cursor-pointer default-transition`}
+  disabled={isLoading}
+  class={classNames(
+    variants["primary"],
+    "hover:bg-opacity-80 disabled:bg-opacity-80 flex center gap-4 px-3.5 py-1.5 text-md rounded-lg cursor-pointer default-transition"
+  )}
   on:click
 >
+  {#if isLoading}
+    <Spinner />
+  {/if}
   <slot />
 </svelte:element>
