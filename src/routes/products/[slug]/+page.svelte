@@ -14,15 +14,15 @@
 <main class="py-10 md:px-20 px-12 space-y-6">
   <section class="w-full flex md:flex-row flex-col gap-10">
     <div class="w-full">
-      <Carousel images={data.images} />
+      <Carousel images={data.product.images} />
     </div>
 
     <div class="w-full">
-      <h2 class="text-4xl font-semibold">{data.title}</h2>
+      <h2 class="text-4xl font-semibold">{data.product.title}</h2>
       <span class="text-primary">Panels</span>
       <ul class="mt-8">
         <h3 class="font-semibold text-lg underline">Key Features</h3>
-        {#each data.features.slice(0, 4) as item}
+        {#each data.product.features.slice(0, 4) as item}
           <li class="list-disc my-4">{item}</li>
         {/each}
       </ul>
@@ -36,13 +36,13 @@
     <div class="space-y-2">
       <h4 class="text-xl font-semibold underline">Product Description</h4>
       <p>
-        {data.description}
+        {data.product.description}
       </p>
     </div>
 
     <ul class="mt-10">
       <h3 class="font-semibold text-xl underline">More Features</h3>
-      {#each data.features.slice(0, 4) as item}
+      {#each data.product.features.slice(4) as item}
         <li class="list-disc my-4">{item}</li>
       {/each}
     </ul>
@@ -50,5 +50,5 @@
 </main>
 
 <Modal bind:open>
-  <GetQuoteForm />
+  <GetQuoteForm serviceId={data.product.uuid} serviceType="product" />
 </Modal>

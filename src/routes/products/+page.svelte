@@ -8,7 +8,8 @@
 
   export let data: PageData;
 
-  let open = false;
+  let open = false,
+    serviceId = "";
 </script>
 
 <main>
@@ -84,11 +85,14 @@
           title={product.title}
           description={product.description}
           href={`/products/${product.slug}`}
-          on:click={() => (open = true)}
+          on:click={() => {
+            open = true;
+            serviceId = product.uuid;
+          }}
         />
       {/each}
     </section>
   </div>
 </main>
 
-<Modal bind:open><GetQuoteForm /></Modal>
+<Modal bind:open><GetQuoteForm {serviceId} serviceType="product" /></Modal>

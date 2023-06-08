@@ -7,7 +7,8 @@
 
   export let data: PageData;
 
-  let open = false;
+  let open = false,
+    serviceId = "";
 </script>
 
 <main class="mb-10">
@@ -22,10 +23,13 @@
         title={plan.title}
         description={plan.description}
         href={`/plans/${plan.slug}`}
-        on:click={() => (open = true)}
+        on:click={() => {
+          open = true;
+          serviceId = plan.uuid;
+        }}
       />
     {/each}
   </section>
 </main>
 
-<Modal bind:open><GetQuoteForm /></Modal>
+<Modal bind:open><GetQuoteForm serviceType="plan" {serviceId} /></Modal>
