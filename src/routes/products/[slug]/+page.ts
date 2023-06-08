@@ -6,9 +6,6 @@ export const load = (async ({ fetch, params }) => {
   const product = await res.json();
 
   return {
-    title: product.data.product.title,
-    images: product.data.product.images,
-    features: product.data.product.features,
-    description: product.data.product.description,
+    product: product.data.product,
   };
 }) satisfies PageLoad;
