@@ -7,5 +7,6 @@ export const load = (async ({ fetch, params }) => {
 
   return {
     product: product.data.product,
+    category: product.data.category,
   };
 }) satisfies PageLoad;

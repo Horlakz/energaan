@@ -19,7 +19,7 @@
 
     <div class="w-full">
       <h2 class="text-4xl font-semibold">{data.product.title}</h2>
-      <span class="text-primary">Panels</span>
+      <span class="text-primary">{data.category.name}</span>
       <ul class="mt-8">
         <h3 class="font-semibold text-lg underline">Key Features</h3>
         {#each data.product.features.slice(0, 4) as item}
