@@ -6,9 +6,7 @@
 
   const queryClient = new QueryClient({
     defaultOptions: {
-      queries: {
-        enabled: browser,
-      },
+      queries: { enabled: browser },
     },
   });
 </script>
