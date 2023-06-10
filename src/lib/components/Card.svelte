@@ -13,6 +13,7 @@
     src={`${PUBLIC_API_URL}/media/${img}`}
     alt={title}
     class="w-full h-48 object-cover rounded-t-3xl"
+    loading="lazy"
   />
   <h5 class="text-lg px-2 font-medium">{title}</h5>
   <p class="line-clamp-4 text-sm text-gray-700 px-2 mb-2">
