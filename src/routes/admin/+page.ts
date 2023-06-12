@@ -1,5 +1,87 @@
 import type { PageLoad } from "./$types";
 
 export const load = (async () => {
-  return {};
+  return {
+    contacts: [
+      {
+        fullName: "Tania Andrew",
+        email: "tania.andrew@hotmail.com",
+        phone: "1234567890",
+        country: "USA",
+      },
+      {
+        fullName: "Franklin Adam",
+        email: "franklin.adam",
+        phone: "1234567890",
+        country: "USA",
+      },
+      {
+        fullName: "John Doe",
+        email: "guys@any.com",
+        phone: "1234567890",
+        country: "USA",
+      },
+    ],
+
+    graph: {
+      labels: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
+      datasets: [
+        {
+          label: "Plans",
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(225, 204,230, .3)",
+          borderColor: "rgb(0 109 91)",
+          borderCapStyle: "butt",
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: "miter",
+          pointBorderColor: "rgb(205, 130,1 58)",
+          pointBackgroundColor: "rgb(255, 255, 255)",
+          pointBorderWidth: 10,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgb(0, 0, 0)",
+          pointHoverBorderColor: "rgba(220, 220, 220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: [0, 0, 0, 0, 0, 12],
+        },
+        {
+          label: "Products",
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(184, 185, 210, .3)",
+          borderColor: "rgb(224, 189, 15)",
+          borderCapStyle: "butt",
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: "miter",
+          pointBorderColor: "rgb(35, 26, 136)",
+          pointBackgroundColor: "rgb(255, 255, 255)",
+          pointBorderWidth: 10,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgb(0, 0, 0)",
+          pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: [0, 0, 0, 0, 0, 10],
+        },
+      ],
+    },
+  };
 }) satisfies PageLoad;
