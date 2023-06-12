@@ -3,10 +3,10 @@
 
   import logo from "$lib/assets/logo.png";
   import Grid from "$lib/components/svg/Grid.svelte";
-  import Phone from "$lib/components/svg/Phone.svelte";
   import Photo from "$lib/components/svg/Photo.svelte";
   import Question from "$lib/components/svg/Question.svelte";
   import Users from "$lib/components/svg/Users.svelte";
+  import MessageSquareLine from "../svg/MessageSquareLine.svelte";
 
   const links = [
     {
@@ -20,9 +20,9 @@
       href: "/admin/services",
     },
     {
-      name: "Contacts",
-      icon: Phone,
-      href: "/admin/testimonials",
+      name: "Messages",
+      icon: MessageSquareLine,
+      href: "/admin/messages",
     },
     {
       name: "Gallery",
