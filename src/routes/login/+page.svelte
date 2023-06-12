@@ -1,12 +1,30 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
+  import { createMutation } from "@tanstack/svelte-query";
+  import { goto } from "$app/navigation";
 
-  import bg from "$lib/assets/solar-panels-house.jpg";
   import logo from "$lib/assets/logo.png";
-  import FormGroup from "$lib/components/FormGroup.svelte";
+  import bg from "$lib/assets/solar-panels-house.jpg";
   import Button from "$lib/components/Button.svelte";
+  import FormGroup from "$lib/components/FormGroup.svelte";
+  import Auth from "$lib/services/auth";
 
-  export let data: PageData;
+  const auth = new Auth();
+  let email: string = "",
+    password: string = "";
+  $: data = { email, password };
+
+  const loginRequest = createMutation(async () => await auth.login(data), {
+    onSuccess: (res) => {
+      goto("/admin");
+      localStorage.setItem("token", res.data.accessToken);
+    },
+    onError: (err) => console.log(err.response),
+  });
+
+  function handleSubmit(e: Event) {
+    e.preventDefault();
+    $loginRequest.mutate();
+  }
 </script>
 
 <main class="w-full h-screen flex relative">
@@ -29,16 +47,24 @@
             label="Email"
             type="email"
             name="email"
+            bind:value={email}
             placeholder="Enter your email"
           />
           <FormGroup
             label="Password"
             type="password"
             name="password"
+            bind:value={password}
             placeholder="Enter your password"
           />
 
-          <Button variant="orange">Login</Button>
+          <Button
+            variant="orange"
+            isLoading={$loginRequest.isLoading}
+            on:click={handleSubmit}
+          >
+            Login
+          </Button>
         </form>
       </div>
     </div>
