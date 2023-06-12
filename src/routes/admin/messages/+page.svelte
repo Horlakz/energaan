@@ -1,8 +1,10 @@
 <script lang="ts">
   import type { PageData } from "./$types";
+  import { goto } from "$app/navigation";
 
   import Table from "$lib/components/Table.svelte";
   import Modal from "$lib/components/Modal.svelte";
+  import Pagination from "$lib/components/Pagination.svelte";
 
   export let data: PageData;
   let message = "",
@@ -31,6 +33,16 @@
       },
     ]}
   />
+
+  <div class="w-full flex center py-4">
+    <Pagination
+      page={data.page}
+      totalPages={data.totalPages}
+      setPage={(page) => {
+        goto(`/admin/messages?page=${page}`);
+      }}
+    />
+  </div>
 </main>
 
 <Modal bind:open>
