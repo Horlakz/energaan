@@ -16,4 +16,11 @@ export default class Contact {
       data,
     });
   }
+
+  list() {
+    return client({
+      method: "GET",
+      url: "/contacts",
+    });
+  }
 }
