@@ -1,26 +1,34 @@
+import { goto } from "$app/navigation";
+import { PUBLIC_API_URL } from "$env/static/public";
 import type { PageLoad } from "./$types";
 
-export const load = (async () => {
+export const ssr = false;
+
+export const load = (async ({ fetch }) => {
+  const contactsReq = await fetch(`${PUBLIC_API_URL}/contacts`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  const productsReq = await fetch(`${PUBLIC_API_URL}/products`);
+  const plansReq = await fetch(`${PUBLIC_API_URL}/plans`);
+
+  if (contactsReq.status == 401 || contactsReq.status == 403) {
+    goto("/login");
+    return;
+  }
+
+  const contacts = await contactsReq.json();
+  const products = await productsReq.json();
+  const plans = await plansReq.json();
+
   return {
-    contacts: [
-      {
-        fullName: "Tania Andrew",
-        email: "tania.andrew@hotmail.com",
-        phone: "1234567890",
-        country: "USA",
-      },
-      {
-        fullName: "Franklin Adam",
-        email: "franklin.adam",
-        phone: "1234567890",
-        country: "USA",
-      },
-      {
-        fullName: "John Doe",
-        email: "guys@any.com",
-        phone: "1234567890",
-        country: "USA",
-      },
+    contacts: contacts?.data?.results ? contacts.data.results : [],
+
+    sums: [
+      { title: "Total Products", value: products?.data?.totalItems || 0 },
+      { title: "Total Plans", value: plans?.data?.totalItems || 0 },
+      { title: "Messages", value: contacts?.data?.totalItems || 0 },
     ],
 
     graph: {

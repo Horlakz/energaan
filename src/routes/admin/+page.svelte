@@ -1,12 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
   import { Line } from "svelte-chartjs";
-
-  import Table from "$lib/components/Table.svelte";
-  import Button from "$lib/components/Button.svelte";
-  import Logout from "$lib/components/svg/Logout.svelte";
-
-  export let data: PageData;
   import {
     Chart as ChartJS,
     Title,
@@ -18,6 +12,11 @@
     CategoryScale,
   } from "chart.js";
 
+  import Table from "$lib/components/Table.svelte";
+  import Button from "$lib/components/Button.svelte";
+  import Logout from "$lib/components/svg/Logout.svelte";
+  import Modal from "$lib/components/Modal.svelte";
+
   ChartJS.register(
     Title,
     Tooltip,
@@ -27,6 +26,10 @@
     PointElement,
     CategoryScale
   );
+
+  export let data: PageData;
+  let message = "Hello World!";
+  let open = false;
 </script>
 
 <main>
@@ -54,10 +57,10 @@
     </div>
 
     <div class="w-3/12 space-y-2.5">
-      {#each [1, 2, 3] as _}
+      {#each data.sums as sum}
         <div class="grid center bg-gray-100 border shadow-md py-4">
-          <span class="text-gray-600">Products</span>
-          <span class="text-2xl font-bold">12</span>
+          <span class="text-gray-600">{sum.title}</span>
+          <span class="text-2xl font-bold">{sum.value}</span>
         </div>
       {/each}
     </div>
@@ -72,16 +75,23 @@
         { title: "Phone" },
         { title: "Country" },
       ]}
-      tableKeys={["fullName", "email", "phone", "country"]}
-      tableData={data.contacts}
+      tableKeys={["fullname", "email", "phone", "country"]}
+      tableData={data.contacts.slice(0, 3)}
       tableActions={[
         {
-          title: "View",
+          title: "View Message",
           action: (data) => {
-            console.log(data);
+            message = data.message;
+            open = true;
           },
         },
       ]}
     />
   </section>
 </main>
+
+<Modal bind:open>
+  <div class="bg-white p-4 rounded-xl">
+    {message}
+  </div>
+</Modal>
