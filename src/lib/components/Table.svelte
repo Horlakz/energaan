@@ -4,7 +4,8 @@
   export let tableHeaders: TableHeadersT[],
     tableData: any[] = [],
     tableKeys: string[] = [],
-    tableActions: TableActionsT[] = [];
+    tableActions: TableActionsT[] = [],
+    tableBodyUppercase = true;
 
   interface TableHeadersT {
     title: string;
@@ -40,7 +41,9 @@
           {#each tableKeys as key}
             <th
               scope="row"
-              class={`px-6 py-4 font-medium whitespace-nowrap uppercase`}
+              class={`px-6 py-4 font-medium whitespace-nowrap ${
+                tableBodyUppercase ? "uppercase" : ""
+              }`}
             >
               {data[key]}
             </th>
