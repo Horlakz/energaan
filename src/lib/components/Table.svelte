@@ -16,6 +16,7 @@
   interface TableActionsT {
     title: string;
     action: (data: any) => any;
+    buttonVariant?: "primary" | "secondary" | "danger" | "warning";
   }
 </script>
 
@@ -55,7 +56,10 @@
           >
             {#if tableActions}
               {#each tableActions as action}
-                <Button on:click={() => action.action(data)}>
+                <Button
+                  variant={action.buttonVariant || "primary"}
+                  on:click={() => action.action(data)}
+                >
                   {action.title}
                 </Button>
               {/each}
@@ -66,5 +70,3 @@
     </tbody>
   </table>
 </div>
-
-<!-- <span>{action(data)}</span> -->
