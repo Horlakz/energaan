@@ -1,10 +1,13 @@
 <script lang="ts">
   import classNames from "classnames";
   import Spinner from "./svg/Spinner.svelte";
+  import type { SvelteComponent } from "svelte";
 
   export let href: string | undefined = undefined,
     isLoading: boolean = false,
-    variant: "primary" | "danger" | "blue" | "orange" = "primary";
+    variant: "primary" | "danger" | "blue" | "orange" = "primary",
+    iconPosition: "left" | "right" = "left",
+    icon: SvelteComponent | undefined = undefined;
 
   const variants = {
     primary: "bg-primary text-white",
@@ -21,12 +24,21 @@
   disabled={isLoading}
   class={classNames(
     variants[variant],
-    "hover:bg-opacity-80 disabled:bg-opacity-80 flex center gap-4 px-3.5 py-1.5 text-md rounded-lg cursor-pointer default-transition"
+    "hover:bg-opacity-80 disabled:bg-opacity-80 flex center gap-2 px-3.5 py-1.5 text-md rounded-lg cursor-pointer default-transition"
   )}
   on:click
 >
-  {#if isLoading}
+  {#if isLoading && iconPosition === "left"}
     <Spinner />
+  {:else if icon && iconPosition === "left"}
+    <svelte:component this={icon} />
   {/if}
+
   <slot />
+
+  {#if isLoading && iconPosition === "right"}
+    <Spinner />
+  {:else if icon && iconPosition === "right"}
+    <svelte:component this={icon} />
+  {/if}
 </svelte:element>
