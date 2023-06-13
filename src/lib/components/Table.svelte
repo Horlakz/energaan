@@ -42,7 +42,7 @@
           {#each tableKeys as key}
             <th
               scope="row"
-              class={`px-6 py-4 font-medium whitespace-nowrap ${
+              class={`px-6 py-4 font-medium whitespace-nowrap max-w-xs text-ellipsis overflow-hidden ${
                 tableBodyUppercase ? "uppercase" : ""
               }`}
             >
