@@ -2,39 +2,7 @@
   import { page } from "$app/stores";
 
   import logo from "$lib/assets/logo.png";
-  import Grid from "$lib/components/svg/Grid.svelte";
-  import Photo from "$lib/components/svg/Photo.svelte";
-  import Question from "$lib/components/svg/Question.svelte";
-  import Users from "$lib/components/svg/Users.svelte";
-  import MessageSquareLine from "../svg/MessageSquareLine.svelte";
-
-  const links = [
-    {
-      name: "Dashboard",
-      icon: Grid,
-      href: "/admin",
-    },
-    {
-      name: "Services",
-      icon: Users,
-      href: "/admin/services",
-    },
-    {
-      name: "Messages",
-      icon: MessageSquareLine,
-      href: "/admin/messages",
-    },
-    {
-      name: "Gallery",
-      icon: Photo,
-      href: "/admin/gallery",
-    },
-    {
-      name: "FAQs",
-      icon: Question,
-      href: "/admin/faqs",
-    },
-  ];
+  import { links } from "./nav.ts";
 </script>
 
 <nav
@@ -64,7 +32,8 @@
             customColor={$page.url.pathname === link.href
               ? "text-gray-300"
               : "text-gray-500"}
-          /><span>{link.name}</span>
+          />
+          <span>{link.name}</span>
         </a>
       </li>
     {/each}
