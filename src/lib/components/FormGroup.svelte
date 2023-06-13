@@ -5,6 +5,8 @@
     placeholder: string = "",
     type: string = "text",
     value: string | number = "",
+    multiple: boolean = false,
+    files: FileList | null = null,
     formType: FormType = "input";
 
   function typeAction(node: { type: string }) {
@@ -61,5 +63,26 @@
       <option value="canada">Canada</option>
       <option value="mexico">Mexico</option>
     </select>
+  </div>
+{:else if formType === "file"}
+  {@const id =
+    label != "" ? label.toLowerCase().replace(" ", "_") : "file_input"}
+  <div>
+    <label
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      for={id}
+    >
+      {label != "" ? label : "Upload a file"}
+    </label>
+    <input
+      class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+      {id}
+      bind:files
+      {multiple}
+      type="file"
+    />
+    <p class="mt-1 text-sm text-gray-500" {id}>
+      SVG, PNG, JPG or GIF (MAX. 800x400px).
+    </p>
   </div>
 {/if}
