@@ -1,7 +1,7 @@
 <script lang="ts">
-  import classNames from "classnames";
-  import Spinner from "./svg/Spinner.svelte";
   import type { SvelteComponent } from "svelte";
+  import { twMerge } from "tailwind-merge";
+  import Spinner from "./svg/Spinner.svelte";
 
   export let href: string | undefined = undefined,
     isLoading: boolean = false,
@@ -22,9 +22,10 @@
   this={href ? "a" : "button"}
   {href}
   disabled={isLoading}
-  class={classNames(
+  class={twMerge(
     variants[variant],
-    "hover:bg-opacity-80 disabled:bg-opacity-80 flex center gap-2 px-3.5 py-1.5 text-md rounded-lg cursor-pointer default-transition"
+    "hover:bg-opacity-80 disabled:bg-opacity-80 flex center gap-2 px-3.5 py-1.5 text-md rounded-lg cursor-pointer default-transition",
+    $$props.class
   )}
   on:click
 >
