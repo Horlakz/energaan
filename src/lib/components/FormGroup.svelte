@@ -1,5 +1,6 @@
 <script lang="ts">
   type FormType = "input" | "textarea" | "select";
+  type SelectOption = { label: string; value: string | number };
 
   export let label: string = "",
     placeholder: string = "",
@@ -7,7 +8,8 @@
     value: string | number = "",
     multiple: boolean = false,
     files: FileList | null = null,
-    formType: FormType = "input";
+    formType: FormType = "input",
+    options: SelectOption[] = [];
 
   function typeAction(node: { type: string }) {
     node.type = type;
@@ -57,21 +59,22 @@
       {id}
       name={id}
       bind:value
-      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
     >
-      <option value="usa">USA</option>
-      <option value="canada">Canada</option>
-      <option value="mexico">Mexico</option>
+      {#if options.length === 0}
+        <option disabled selected>No options available </option>
+      {:else}
+        {#each options as { value, label }}
+          <option {value}>{label}</option>
+        {/each}
+      {/if}
     </select>
   </div>
 {:else if formType === "file"}
   {@const id =
     label != "" ? label.toLowerCase().replace(" ", "_") : "file_input"}
   <div>
-    <label
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      for={id}
-    >
+    <label class="block mb-2 text-sm font-medium text-gray-900" for={id}>
       {label != "" ? label : "Upload a file"}
     </label>
     <input
