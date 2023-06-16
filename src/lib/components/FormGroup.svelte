@@ -74,16 +74,24 @@
   {@const id =
     label != "" ? label.toLowerCase().replace(" ", "_") : "file_input"}
   <div>
-    <label class="block mb-2 text-sm font-medium text-gray-900" for={id}>
-      {label != "" ? label : "Upload a file"}
+    <label for={id}>
+      <span class="block mb-2 text-sm font-medium text-gray-900">
+        {label != "" ? label : "Upload a file"}
+      </span>
+      <div class="flex gap-1 items-center cursor-pointer">
+        <span class="bg-gray-600 text-white px-2 py-1 rounded-lg">
+          Browse Files
+        </span>
+        <span class="text-sm font-medium text-gray-500">
+          {files && files.length > 0
+            ? files.length > 1
+              ? files.length + " files selected"
+              : files[0].name
+            : "No file selected"}
+        </span>
+      </div>
     </label>
-    <input
-      class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-      {id}
-      bind:files
-      {multiple}
-      type="file"
-    />
+    <input class="hidden" {id} bind:files {multiple} type="file" />
     <p class="mt-1 text-sm text-gray-500" {id}>
       SVG, PNG, JPG or GIF (MAX. 800x400px).
     </p>
