@@ -3,7 +3,13 @@
 
   import Button from "./Button.svelte";
 
-  export let title: string, img: string, description: string, href: string;
+  export let title: string,
+    img: string,
+    description: string,
+    href: string,
+    linkText = "Read More",
+    buttonText = "Get a Quote",
+    buttonVariant = "primary";
 </script>
 
 <div
@@ -22,9 +28,9 @@
   <div class="p-3 w-full flex justify-between items-center absolute bottom-0">
     <a {href}>
       <span class="text-sm font-semibold text-primary cursor-pointer">
-        Read More
+        {linkText}
       </span>
     </a>
-    <Button on:click>Get a Quote</Button>
+    <Button on:click variant={buttonVariant}>{buttonText}</Button>
   </div>
 </div>
