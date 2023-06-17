@@ -9,7 +9,7 @@
     href: string,
     linkText = "Read More",
     buttonText = "Get a Quote",
-    buttonVariant = "primary";
+    buttonVariant: "primary" | "danger" | "warning" = "primary";
 </script>
 
 <div
