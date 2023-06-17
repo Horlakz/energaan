@@ -11,7 +11,7 @@
 
   const variants = {
     primary: "bg-primary text-white",
-    danger: "bg-red-600 text-white",
+    danger: "bg-red-500 text-white",
     warning: "bg-yellow-600 text-white",
     blue: "bg-blue-600 text-white",
     orange: "bg-orange-600 text-white",
