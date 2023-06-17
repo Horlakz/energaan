@@ -42,16 +42,16 @@
         {#each data.categories as item}
           <div class="flex items-center mb-4">
             <input
-              id={item.slug}
+              id={item.category.slug}
               type="checkbox"
-              value={item.uuid}
+              value={item.category.uuid}
               class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
             />
             <label
-              for={item.slug}
+              for={item.category.slug}
               class="ml-2 text-sm font-medium text-gray-900"
             >
-              {item.name}
+              {item.category.name}
             </label>
           </div>
         {/each}
