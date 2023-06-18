@@ -88,6 +88,9 @@
     <h4 class="text-xl font-semibold">
       Are you sure you want to delete this Category?
     </h4>
+    <p class="text-lg text-center text-gray-600">
+      Please not that all products linked to this category will be deleted
+    </p>
     <Button
       variant="danger"
       isLoading={$removeCategory.isLoading}
