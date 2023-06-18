@@ -9,10 +9,17 @@ interface PlanData {
 
 export default class Plan {
   create(data: PlanData) {
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("image", data.image);
+    for (let i = 0; i < data.features.length; i++) {
+      formData.append("features", data.features[i]);
+    }
     return client({
       method: "POST",
       url: "/plans",
-      data,
+      data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
   }
