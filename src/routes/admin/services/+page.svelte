@@ -47,12 +47,22 @@
 
   const createCategory = createMutation(
     async () => await categorySvc.create(categoryData.name),
-    { onSuccess: success() }
+    {
+      onSuccess: () => {
+        success();
+        invalidateAll();
+      },
+    }
   );
 
   const deleteProduct = createMutation(
     async () => await productSvc.delete(slug),
-    { onSuccess: success() }
+    {
+      onSuccess: () => {
+        success();
+        invalidateAll();
+      },
+    }
   );
 
   const deletePlan = createMutation(async () => await planSvc.delete(slug), {
@@ -146,14 +156,23 @@
 </main>
 
 <Modal bind:open={plan}>
-  <CreateServiceForm {tabTitle} on:success={success} />
+  <CreateServiceForm
+    {tabTitle}
+    on:success={() => {
+      success();
+      invalidateAll();
+    }}
+  />
 </Modal>
 
 <Modal bind:open={product}>
   <CreateServiceForm
     {tabTitle}
     categories={data.categories}
-    on:success={success}
+    on:success={() => {
+      success();
+      invalidateAll();
+    }}
   />
 </Modal>
 
