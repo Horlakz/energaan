@@ -15,6 +15,7 @@
     warning: "bg-yellow-600 text-white",
     blue: "bg-blue-600 text-white",
     orange: "bg-orange-600 text-white",
+    gray: "bg-gray-600 text-white",
   };
 </script>
 
