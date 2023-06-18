@@ -78,9 +78,9 @@
   </div>
 </Modal>
 
-<Modal bind:notAvailable>
+<Modal bind:open={notAvailable}>
   <div class="bg-white p-4 gap-2 text-center grid center rounded-xl">
-    <h1 class="text-2xl font-semibold">Not Available</h1>
-    <p>Service is not available or has been deleted</p>
+    <h1 class="text-2xl font-semibold text-red-600">Not Available</h1>
+    <p class="text-gray-600">Service is not available or has been deleted</p>
   </div>
 </Modal>
