@@ -1,6 +1,6 @@
 import { client } from "../apiClient";
 
-interface ProductData {
+interface PlanData {
   fullName: string;
   email: string;
   phone: string;
@@ -9,27 +9,20 @@ interface ProductData {
   serviceType: string;
 }
 
-export default class Product {
-  create(data: ProductData) {
+export default class Plan {
+  create(data: PlanData) {
     return client({
       method: "POST",
-      url: "/products",
+      url: "/plan",
       data,
       headers: { "Content-Type": "multipart/form-data" },
-    });
-  }
-
-  filterByCategory(id: string) {
-    return client({
-      method: "GET",
-      url: "/products?categoryId=" + id,
     });
   }
 
   delete(slug: string) {
     return client({
       method: "DELETE",
-      url: "/products/" + slug,
+      url: "/plan/" + slug,
     });
   }
 }
