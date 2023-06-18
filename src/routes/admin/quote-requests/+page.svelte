@@ -12,7 +12,8 @@
     description = "",
     slug = "",
     serviceType = "",
-    open = false;
+    open = false,
+    notAvailable = false;
 
   const serviceLink = {
     plan: "/plans/",
@@ -44,11 +45,15 @@
       {
         title: "Service Details",
         action: (data) => {
-          title = data.serviceDetails.title;
-          description = data.serviceDetails.description;
-          slug = data.serviceDetails.slug;
-          serviceType = data.serviceType;
-          open = true;
+          if (data.serviceDetails) {
+            title = data.serviceDetails.title;
+            description = data.serviceDetails.description;
+            slug = data.serviceDetails.slug;
+            serviceType = data.serviceType;
+            open = true;
+          } else {
+            notAvailable = true;
+          }
         },
       },
     ]}
@@ -70,5 +75,12 @@
     <h1 class="text-2xl font-semibold">{title}</h1>
     <p>{description}</p>
     <Button href={serviceLink[serviceType] + slug}>Go To Service</Button>
+  </div>
+</Modal>
+
+<Modal bind:notAvailable>
+  <div class="bg-white p-4 gap-2 text-center grid center rounded-xl">
+    <h1 class="text-2xl font-semibold">Not Available</h1>
+    <p>Service is not available or has been deleted</p>
   </div>
 </Modal>
