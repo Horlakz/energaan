@@ -1,50 +1,64 @@
 <script lang="ts">
+  import { invalidateAll } from "$app/navigation";
+  import { createMutation } from "@tanstack/svelte-query";
   import { Plus } from "svelte-heros-v2";
   import { writable } from "svelte/store";
   import type { PageData } from "./$types";
-  import { invalidateAll } from "$app/navigation";
-  import { createMutation, createQuery } from "@tanstack/svelte-query";
 
   import Button from "$lib/components/Button.svelte";
+  import Card from "$lib/components/Card.svelte";
   import FormGroup from "$lib/components/FormGroup.svelte";
   import Modal from "$lib/components/Modal.svelte";
   import CreateServiceForm from "$lib/components/admin/CreateServiceForm.svelte";
+  import Categories from "$lib/components/admin/services/Categories.svelte";
   import TabItem from "$lib/components/tabs/TabItem.svelte";
   import Tabs from "$lib/components/tabs/Tabs.svelte";
-  import Categories from "$lib/components/admin/services/Categories.svelte";
   import Category from "$lib/services/services/category";
+  import Plan from "$lib/services/services/plan";
   import Product from "$lib/services/services/product";
-  import Card from "$lib/components/Card.svelte";
 
-  export let data: PageData,
-    currentCategoryID = "";
+  export let data: PageData;
 
   const categorySvc = new Category();
   const productSvc = new Product();
+  const planSvc = new Plan();
   let tabTitle = "",
     plan = false,
     product = false,
-    category = false;
+    category = false,
+    removePlan = false,
+    removeProduct = false;
 
   let title = "",
-    description = "",
-    categoryId = data.categories.length > 1 ? data.categories[0].uuid : "",
-    images = null;
-  const features = writable<string[]>([]);
-  let featureValue = "";
+    slug = "";
 
   $: categoryData = { name: title };
 
+  function success() {
+    title = "";
+    slug = "";
+    category = false;
+    removeProduct = false;
+    removePlan = false;
+    plan = false;
+    product = false;
+    invalidateAll();
+    return;
+  }
+
   const createCategory = createMutation(
     async () => await categorySvc.create(categoryData.name),
-    {
-      onSuccess: () => {
-        title = "";
-        category = false;
-        invalidateAll();
-      },
-    }
+    { onSuccess: success() }
   );
+
+  const deleteProduct = createMutation(
+    async () => await productSvc.delete(slug),
+    { onSuccess: success() }
+  );
+
+  const deletePlan = createMutation(async () => await planSvc.delete(slug), {
+    onSuccess: success(),
+  });
 </script>
 
 <main>
@@ -77,22 +91,40 @@
   <Tabs>
     <TabItem open title="Plans" on:currentTab={(e) => (tabTitle = e.detail)}>
       <div class="grid grid-cols-4 gap-4">
-        {#each [1, 2, 3, 4, 5, 6, 3, 4] as plan}
+        {#each data.plans as plan}
           <Card
+            title={plan.title}
+            img={plan.image}
+            description={plan.description}
+            href="/plans/{plan.slug}"
             linkText="Go to plan"
             buttonText="Delete Plan"
             buttonVariant="danger"
+            on:click={() => {
+              removePlan = true;
+              title = plan.title;
+              slug = plan.slug;
+            }}
           />
         {/each}
       </div>
     </TabItem>
     <TabItem title="Products" on:currentTab={(e) => (tabTitle = e.detail)}>
       <div class="grid grid-cols-4 gap-4">
-        {#each [1, 2, 3, 4, 5, 6, 3] as product}
+        {#each data.products as product}
           <Card
+            title={product.title}
+            img={product.images[0]}
+            description={product.description}
+            href="/products/{product.slug}"
             linkText="Go to product"
             buttonText="Delete product"
             buttonVariant="danger"
+            on:click={() => {
+              removeProduct = true;
+              title = product.title;
+              slug = product.slug;
+            }}
           />
         {/each}
       </div>
@@ -100,7 +132,6 @@
     <TabItem title="Categories" on:currentTab={(e) => (tabTitle = e.detail)}>
       <Categories
         data={data.categories.map((cat) => {
-          currentCategoryID = cat.uuid;
           return {
             name: cat.category.name,
             shortname: cat.category.slug,
@@ -113,18 +144,14 @@
 </main>
 
 <Modal bind:open={plan}>
-  <CreateServiceForm {tabTitle} {title} {description} {images} />
+  <CreateServiceForm {tabTitle} on:success={success} />
 </Modal>
 
 <Modal bind:open={product}>
   <CreateServiceForm
     {tabTitle}
-    multiple
-    {title}
-    {description}
     categories={data.categories}
-    {categoryId}
-    {images}
+    on:success={success}
   />
 </Modal>
 
@@ -140,5 +167,35 @@
         Create
       </Button>
     </form>
+  </div>
+</Modal>
+
+<Modal bind:open={removePlan}>
+  <div class="bg-white p-8 gap-6 grid center rounded-xl">
+    <h4 class="text-xl font-semibold">
+      Are you sure you want to delete {title}?
+    </h4>
+    <Button
+      variant="danger"
+      isLoading={$deletePlan.isLoading}
+      on:click={() => $deletePlan.mutate()}
+    >
+      Delete
+    </Button>
+  </div>
+</Modal>
+
+<Modal bind:open={removeProduct}>
+  <div class="bg-white p-8 gap-6 grid center rounded-xl">
+    <h4 class="text-xl font-semibold">
+      Are you sure you want to delete {title}?
+    </h4>
+    <Button
+      variant="danger"
+      isLoading={$deleteProduct.isLoading}
+      on:click={() => $deleteProduct.mutate()}
+    >
+      Delete
+    </Button>
   </div>
 </Modal>
