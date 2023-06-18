@@ -1,37 +1,84 @@
 <script lang="ts">
+  import { createMutation } from "@tanstack/svelte-query";
+  import { createEventDispatcher } from "svelte";
   import { Plus, XMark } from "svelte-heros-v2";
   import { writable } from "svelte/store";
 
   import Button from "$lib/components/Button.svelte";
   import FormGroup from "$lib/components/FormGroup.svelte";
+  import Plan from "$lib/services/services/plan";
+  import Product from "$lib/services/services/product";
 
   export let tabTitle = "",
-    title = "",
-    description = "",
-    categoryId = "",
-    categories,
-    images = null,
-    multiple = false,
-    isLoading = false;
+    categories = [];
 
+  const dispatch = createEventDispatcher();
+  const planSvc = new Plan();
+  const productSvc = new Product();
+  let title = "",
+    description = "",
+    categoryId = categories?.length > 1 ? categories[0].uuid : "",
+    images = null,
+    isLoading = false,
+    featureValue = "",
+    service: "plan" | "product" = "plan";
   const features = writable<string[]>([]);
-  let featureValue = "";
+
+  if (tabTitle == "Plans") service = "plan";
+  else service = "product";
+
+  $: planData = {
+    title,
+    description,
+    features: $features,
+    image: images ? images[0] : null,
+  };
+
+  $: productData = {
+    title,
+    description,
+    features: $features,
+    image: images ? images : [],
+    categoryId,
+  };
+
+  function mutationSuccess() {
+    title = "";
+    description = "";
+    features.set([]);
+    images = null;
+    dispatch("success");
+  }
+
+  const createPlan = createMutation(
+    async () => await planSvc.create(planData),
+    {
+      onSuccess: mutationSuccess(),
+    }
+  );
+
+  const createProduct = createMutation(
+    async () => await productSvc.create(productData),
+    {
+      onSuccess: mutationSuccess(),
+    }
+  );
 </script>
 
 <div class="bg-white p-4 grid center rounded-xl">
   <h4 class="text-xl font-semibold">Add New {tabTitle.replace(/s$/, "")}</h4>
 
   <form class="space-y-2 p-4" on:submit|preventDefault>
-    <div class={categories ? "flex gap-2 w-full" : ""}>
+    <div class={service == "product" ? "flex gap-2 w-full" : ""}>
       <FormGroup label="Title" bind:value={title} />
 
-      {#if categories}
+      {#if service == "product"}
         <FormGroup
           label="Category"
           formType="select"
           options={categories.map((cat) => ({
-            label: cat.name,
-            value: cat.uuid,
+            label: cat.category.name,
+            value: cat.category.uuid,
           }))}
           bind:value={categoryId}
         />
@@ -46,10 +93,10 @@
 
     <div class="w-full col-span-2 flex center">
       <FormGroup
-        label="{tabTitle} Image{multiple ? 's' : ''}"
+        label="{tabTitle} Image{service == 'product' ? 's' : ''}"
         formType="file"
         bind:files={images}
-        {multiple}
+        multiple={service == "product"}
       />
     </div>
 
@@ -88,7 +135,15 @@
     </div>
 
     <div class="col-span-2 my-8 flex center">
-      <Button {isLoading} on:click>Create {tabTitle.replace(/s$/, "")}</Button>
+      <Button
+        isLoading={$createPlan.isLoading || $createProduct.isLoading}
+        on:click={() => {
+          if (service == "plan") $createPlan.mutate();
+          else $createProduct.mutate();
+        }}
+      >
+        Create {tabTitle.replace(/s$/, "")}
+      </Button>
     </div>
   </form>
 </div>
