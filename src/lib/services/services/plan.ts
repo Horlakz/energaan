@@ -1,19 +1,17 @@
 import { client } from "../apiClient";
 
 interface PlanData {
-  fullName: string;
-  email: string;
-  phone: string;
-  country: string;
-  serviceId: string;
-  serviceType: string;
+  title: string;
+  description: string;
+  features: string[];
+  image: File;
 }
 
 export default class Plan {
   create(data: PlanData) {
     return client({
       method: "POST",
-      url: "/plan",
+      url: "/plans",
       data,
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -22,7 +20,7 @@ export default class Plan {
   delete(slug: string) {
     return client({
       method: "DELETE",
-      url: "/plan/" + slug,
+      url: "/plans/" + slug,
     });
   }
 }

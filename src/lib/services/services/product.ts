@@ -1,12 +1,11 @@
 import { client } from "../apiClient";
 
 interface ProductData {
-  fullName: string;
-  email: string;
-  phone: string;
-  country: string;
-  serviceId: string;
-  serviceType: string;
+  title: string;
+  description: string;
+  features: string[];
+  image: File;
+  categoryId: string;
 }
 
 export default class Product {
