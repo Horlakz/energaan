@@ -53,14 +53,14 @@
   const createPlan = createMutation(
     async () => await planSvc.create(planData),
     {
-      onSuccess: mutationSuccess(),
+      onSuccess: () => mutationSuccess(),
     }
   );
 
   const createProduct = createMutation(
     async () => await productSvc.create(productData),
     {
-      onSuccess: mutationSuccess(),
+      onSuccess: () => mutationSuccess(),
     }
   );
 </script>
