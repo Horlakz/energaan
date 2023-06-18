@@ -42,7 +42,6 @@
     removePlan = false;
     plan = false;
     product = false;
-    invalidateAll();
     return;
   }
 
@@ -57,7 +56,10 @@
   );
 
   const deletePlan = createMutation(async () => await planSvc.delete(slug), {
-    onSuccess: success(),
+    onSuccess: () => {
+      success();
+      invalidateAll();
+    },
   });
 </script>
 
