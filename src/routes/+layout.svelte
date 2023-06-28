@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from "$app/environment";
+  import Toast from "$lib/components/toast/Toast.svelte";
   import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
 
   import "styles/global.scss";
@@ -24,3 +25,4 @@
 <QueryClientProvider client={queryClient}>
   <slot />
 </QueryClientProvider>
+<Toast />
