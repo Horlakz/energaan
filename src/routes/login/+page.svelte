@@ -24,6 +24,7 @@
     onError: (err: any) => {
       const msg = {
         message: err?.response?.data?.message || "Something went wrong",
+        background: 'bg-error'
       };
       toastStore.trigger(msg);
     },

@@ -57,6 +57,7 @@
       onError: (err: any) => {
         const msg = {
           message: err?.response?.data?.message || "Something Went Wrong",
+          background: 'bg-error'
         };
         toastStore.trigger(msg);
       },
