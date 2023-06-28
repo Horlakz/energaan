@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { Bars3 } from "svelte-heros-v2";
+  import { Bars3, XMark } from "svelte-heros-v2";
   import { quintOut } from "svelte/easing";
   import { slide } from "svelte/transition";
 
@@ -24,7 +24,7 @@
   };
 </script>
 
-<svelte:window on:click={closeModal} />
+<!-- <svelte:window on:click={closeModal} /> -->
 
 <header>
   <nav class="flex justify-between items-center w-full px-14 lg:px-20 py-4">
@@ -53,10 +53,17 @@
 
     <a href="/contact" class="font-medium hidden md:block">Contact Us</a>
 
-    <Bars3
-      class="h-8 w-8 sm:hidden cursor-pointer"
-      on:click={() => (navActive = !navActive)}
-    />
+    {#if navActive}
+      <XMark
+        class="h-8 w-8 sm:hidden cursor-pointer"
+        on:click={() => (navActive = !navActive)}
+      />
+    {:else}
+      <Bars3
+        class="h-8 w-8 sm:hidden cursor-pointer"
+        on:click={() => (navActive = !navActive)}
+      />
+    {/if}
   </nav>
 </header>
 
@@ -66,7 +73,7 @@
   }
 
   .ul-mobile {
-    @apply bg-gray-100 p-4 gap-4 flex flex-col items-center justify-center absolute top-12 right-10 w-2/4 z-50;
+    @apply bg-gray-100 p-4 gap-4 flex flex-col items-center justify-center absolute top-20 right-10 w-2/4 z-50;
   }
 
   .nav-active {
