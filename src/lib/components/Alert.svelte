@@ -3,7 +3,7 @@
   import { slide } from "svelte/transition";
   import { twMerge } from "tailwind-merge";
 
-  export let type: "success" | "info" | "warning" | "error" = "info";
+  export let status: "success" | "info" | "warning" | "error" = "info";
   export let content: string = "";
 
   const defaultClasses =
@@ -15,7 +15,7 @@
     error: "border-red-500",
   };
 
-  const classes = twMerge(defaultClasses, typeClasses[type]);
+  const classes = twMerge(defaultClasses, typeClasses[status]);
 
   function remove(node: HTMLElement) {
     setTimeout(() => {
