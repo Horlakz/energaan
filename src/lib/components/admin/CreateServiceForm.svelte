@@ -8,6 +8,7 @@
   import FormGroup from "$lib/components/FormGroup.svelte";
   import Plan from "$lib/services/services/plan";
   import Product from "$lib/services/services/product";
+  import { toastStore } from "$lib/components/toast/stores";
 
   export let tabTitle = "",
     categories = [];
@@ -42,18 +43,33 @@
     categoryId,
   };
 
+  const sMsg = {
+    message: `${service} creation is sucessful`,
+  };
+
   function mutationSuccess() {
     title = "";
     description = "";
     features.set([]);
     images = null;
+    toastStore.trigger(sMsg);
     dispatch("success");
+  }
+
+  function mutationError(err: any) {
+    const msg = {
+      message: err?.response?.data?.message || "Something went wrong",
+      background: "bg-error",
+    };
+
+    toastStore.trigger(msg);
   }
 
   const createPlan = createMutation(
     async () => await planSvc.create(planData),
     {
       onSuccess: () => mutationSuccess(),
+      onError: (err) => mutationError(err),
     }
   );
 
@@ -61,6 +77,7 @@
     async () => await productSvc.create(productData),
     {
       onSuccess: () => mutationSuccess(),
+      onError: (err) => mutationError(err),
     }
   );
 </script>
