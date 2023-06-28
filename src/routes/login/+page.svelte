@@ -7,6 +7,7 @@
   import Button from "$lib/components/Button.svelte";
   import FormGroup from "$lib/components/FormGroup.svelte";
   import Auth from "$lib/services/auth";
+  import { toastStore } from "$lib/components/toast/stores";
 
   const auth = new Auth();
   let email: string = "",
@@ -17,8 +18,15 @@
     onSuccess: (res) => {
       goto("/admin");
       localStorage.setItem("token", res.data.accessToken);
+      const msg = { message: "Login successful" };
+      toastStore.trigger(msg);
     },
-    onError: (err) => console.log(err.response),
+    onError: (err: any) => {
+      const msg = {
+        message: err?.response?.data?.message || "Something went wrong",
+      };
+      toastStore.trigger(msg);
+    },
   });
 
   function handleSubmit(e: Event) {
