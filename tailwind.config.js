@@ -11,6 +11,10 @@ export default {
       },
       colors: {
         primary: "#006d5b",
+        info: "#4f46e5",
+        success: "#84cc16",
+        warning: "#eab308",
+        error: "#d41976",
       },
     },
   },
