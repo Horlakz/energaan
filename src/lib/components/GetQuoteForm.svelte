@@ -1,12 +1,15 @@
 <script lang="ts">
   import { createMutation } from "@tanstack/svelte-query";
+  import { createEventDispatcher } from "svelte/internal";
 
   import Button from "./Button.svelte";
   import FormGroup from "./FormGroup.svelte";
   import Quote from "$lib/services/quote";
+  import { toastStore } from "./toast/stores";
 
   export let serviceId: string, serviceType: string;
 
+  const dispatch = createEventDispatcher();
   let fullName = "",
     email = "",
     phone = "",
@@ -21,16 +24,28 @@
     serviceType,
   };
   const quote = new Quote();
+  const message = {
+    message: "Quote sent Sucessfully",
+  };
 
   const mutation = createMutation(async () => await quote.create(formData), {
     onSuccess: () => {
-      console.log("success");
+      toastStore.trigger(message);
+      dispatch("close");
 
       // clear form
       fullName = "";
       email = "";
       phone = "";
       country = "";
+    },
+    onError: (err: any) => {
+      const t = {
+        message: err?.response?.data?.message || "Something went wrong",
+        background: "bg-error",
+      };
+
+      toastStore.trigger(t);
     },
   });
 

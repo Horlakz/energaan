@@ -50,5 +50,9 @@
 </main>
 
 <Modal bind:open>
-  <GetQuoteForm serviceId={data.product.uuid} serviceType="product" />
+  <GetQuoteForm
+    serviceId={data.product.uuid}
+    serviceType="product"
+    on:close={() => (open = false)}
+  />
 </Modal>

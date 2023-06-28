@@ -95,4 +95,10 @@
   </div>
 </main>
 
-<Modal bind:open><GetQuoteForm {serviceId} serviceType="product" /></Modal>
+<Modal bind:open>
+  <GetQuoteForm
+    {serviceId}
+    serviceType="product"
+    on:close={() => (open = false)}
+  />
+</Modal>

@@ -32,4 +32,10 @@
   </section>
 </main>
 
-<Modal bind:open><GetQuoteForm serviceType="plan" {serviceId} /></Modal>
+<Modal bind:open>
+  <GetQuoteForm
+    serviceType="plan"
+    {serviceId}
+    on:close={() => (open = false)}
+  />
+</Modal>
