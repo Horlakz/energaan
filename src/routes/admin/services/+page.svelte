@@ -2,7 +2,6 @@
   import { invalidateAll } from "$app/navigation";
   import { createMutation } from "@tanstack/svelte-query";
   import { Plus } from "svelte-heros-v2";
-  import { writable } from "svelte/store";
   import type { PageData } from "./$types";
 
   import Button from "$lib/components/Button.svelte";
@@ -13,6 +12,7 @@
   import Categories from "$lib/components/admin/services/Categories.svelte";
   import TabItem from "$lib/components/tabs/TabItem.svelte";
   import Tabs from "$lib/components/tabs/Tabs.svelte";
+  import { toastStore } from "$lib/components/toast/stores";
   import Category from "$lib/services/services/category";
   import Plan from "$lib/services/services/plan";
   import Product from "$lib/services/services/product";
@@ -31,6 +31,7 @@
 
   let title = "",
     slug = "";
+  const cMsg = { message: "Category created successfully" };
 
   $: categoryData = { name: title };
 
@@ -51,6 +52,13 @@
       onSuccess: () => {
         success();
         invalidateAll();
+        toastStore.trigger(cMsg);
+      },
+      onError: (err: any) => {
+        const msg = {
+          message: err?.response?.data?.message || "Something Went Wrong",
+        };
+        toastStore.trigger(msg);
       },
     }
   );
