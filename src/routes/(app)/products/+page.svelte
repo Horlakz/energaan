@@ -61,16 +61,16 @@
         {#each data.categories as item}
           <span>
             <input
-              id={item.slug}
+              id={item.category.slug}
               type="checkbox"
               value=""
               class="peer hidden"
             />
             <label
-              for={item.slug}
+              for={item.category.slug}
               class="shadow-md bg-primary bg-opacity-10 p-3 text-lg text-gray-800 font-medium peer-checked:border-2 border-primary rounded-xl cursor-pointer"
             >
-              {item.name}
+              {item.category.name}
             </label>
           </span>
         {/each}
