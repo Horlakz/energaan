@@ -20,7 +20,8 @@
     </div>
 
     <h2 class="text-5xl font-light pl-6 pt-4">
-      Solar energy. <br />the smartest way
+    
+      Welcome to our Energaan solar website! 
     </h2>
 
     <img src={graphImg} alt="graph" class="pt-28 w-[30rem]" />
@@ -43,7 +44,8 @@
   <div class="text-white sm:px-10 px-4 py-8 space-y-14">
     <div class="flex justify-between items-end gap-4">
       <p class="md:text-4xl text-2xl">
-        A Responsible <br /> Corporate Customers
+       We are dedicated to helping you  <br />harness 
+      the power of the sun 
       </p>
       <button
         class="rounded-3xl bg-primary text-white text-sm px-4 py-2"
@@ -82,9 +84,7 @@
           </span>
         </div>
         <p class="text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
-          perferendis esse nemo sit qui possimus quos autem officia repellat
-          laudantium?
+          We are dedicated to helping you harness the power of the sun to power your home or business while reducing your environmental impact
         </p>
       </div>
     </div>

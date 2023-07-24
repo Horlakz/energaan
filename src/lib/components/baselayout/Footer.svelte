@@ -41,8 +41,8 @@
     <div
       class="space-x-8 flex sm:flex-row flex-col justify-center items-center"
     >
-      <a href="/privacy-policy">instagram</a>
-      <a href="/privacy-policy">facebook</a>
+      <a href="https://instagram.com/energaan_solar?igshid=MzRlODBiNWFlZA==">instagram</a>
+      <a href="https://www.facebook.com/EarlySunsolar?mibextid=LQQJ4d">facebook</a>
     </div>
   </section>
 </footer>
