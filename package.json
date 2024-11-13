@@ -38,7 +38,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@sveltejs/adapter-vercel": "^5.4.7",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
     "classnames": "^2.3.2",
